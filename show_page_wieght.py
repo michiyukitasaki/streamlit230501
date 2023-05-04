@@ -24,8 +24,8 @@ def weight_app():
 
     # 体重データを保存するDataFrameを初期化
     if 'weight_data' not in st.session_state:
-        if os.path.isfile('weight_data2.csv'):
-            st.session_state['weight_data'] = pd.read_csv('weight_data2.csv')  # 保存されているDataFrameを取得
+        if os.path.isfile('weight_data4.csv'):
+            st.session_state['weight_data'] = pd.read_csv('weight_data4.csv')  # 保存されているDataFrameを取得
         else:
             st.session_state['weight_data'] = pd.DataFrame(
                 columns=['Date', 'Weight'])  # 保存されているDataFrameがない場合は空のDataFrameを作成
@@ -34,12 +34,15 @@ def weight_app():
     if st.button('追加'):
         new_data = pd.DataFrame(input_data)
         df = st.session_state['weight_data']  # 保存されているDataFrameを取得
+        df['Date'] = pd.to_datetime(df['Date'])  # 日付をdatetime型に変換
+        df['Date'] = df['Date'].dt.strftime('%Y-%m-%d') # 日付を文字列型に変換
         df = pd.concat([df, new_data], ignore_index=True)  # 保存されているDataFrameと新しく入力されたDataFrameを結合
         st.session_state['weight_data'] = df  # 結合したDataFrameを保存
-        df.to_csv('weight_data2.csv', index=False)  # 保存
+        df.to_csv('weight_data4.csv', index=False)  # 保存
 
     # DataFrameを表示
-    df = st.session_state['weight_data']
+    df = st.session_state['weight_data'] # 保存されているDataFrameを取得
+    df['Date'] = pd.to_datetime(df['Date']) # 日付をdatetime型に変換
     st.dataframe(df.style.highlight_max(axis=0))
 
     # グラフを描画
