@@ -24,8 +24,8 @@ def weight_app():
 
     # 体重データを保存するDataFrameを初期化
     if 'weight_data' not in st.session_state:
-        if os.path.isfile('weight_data.csv'):
-            st.session_state['weight_data'] = pd.read_csv('weight_data.csv')  # 保存されているDataFrameを取得
+        if os.path.isfile('weight_data2.csv'):
+            st.session_state['weight_data'] = pd.read_csv('weight_data2.csv')  # 保存されているDataFrameを取得
         else:
             st.session_state['weight_data'] = pd.DataFrame(
                 columns=['Date', 'Weight'])  # 保存されているDataFrameがない場合は空のDataFrameを作成
@@ -36,7 +36,7 @@ def weight_app():
         df = st.session_state['weight_data']  # 保存されているDataFrameを取得
         df = pd.concat([df, new_data], ignore_index=True)  # 保存されているDataFrameと新しく入力されたDataFrameを結合
         st.session_state['weight_data'] = df  # 結合したDataFrameを保存
-        df.to_csv('weight_data.csv', index=False)  # 保存
+        df.to_csv('weight_data2.csv', index=False)  # 保存
 
     # DataFrameを表示
     df = st.session_state['weight_data']
