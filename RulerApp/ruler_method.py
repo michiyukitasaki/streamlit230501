@@ -103,10 +103,10 @@ def measure_object(bg_image, object_image, ratio, show_result=False):
 
     # 寸法を画像に描画する
     result_image = object_image.copy()
-    cv2.putText(result_image, f"Width: {width_cm:.2f} cm", (x, y + h + 200), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2)
-    cv2.putText(result_image, f"Height: {height_cm:.2f} cm", (x, y + h + 270), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2)
-    cv2.putText(result_image, f"Area: {area_cm2:.2f} cm^2", (x, y + h + 60), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2)
-    cv2.putText(result_image, f"Perimeter: {perimeter_cm:.2f} cm", (x, y + h + 130), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2)
+    cv2.putText(result_image, f"Width: {width_cm:.2f} cm", (x, y + h + 420), cv2.FONT_HERSHEY_SIMPLEX, 5, (255, 51, 0), 5)
+    cv2.putText(result_image, f"Height: {height_cm:.2f} cm", (x, y + h + 570), cv2.FONT_HERSHEY_SIMPLEX, 5, (255, 51, 0), 5)
+    cv2.putText(result_image, f"Area: {area_cm2:.2f} cm^2", (x, y + h + 120), cv2.FONT_HERSHEY_SIMPLEX, 5, (255, 51, 0), 5)
+    cv2.putText(result_image, f"Perimeter: {perimeter_cm:.2f} cm", (x, y + h + 270), cv2.FONT_HERSHEY_SIMPLEX, 5, (255, 51, 0), 5)
 
     # 最小外接矩形を取得
     rect = cv2.minAreaRect(object_contour)
@@ -116,10 +116,10 @@ def measure_object(bg_image, object_image, ratio, show_result=False):
     box = np.intp(box)  # ここをnp.intpに変更
 
     # 外周をラインで囲む色 (BGR)
-    contour_color = (0, 255, 0)
+    contour_color = (255, 51, 0)
 
     # 外周をラインで囲む太さ
-    contour_thickness = 3
+    contour_thickness = 5
 
     # 外周をラインで囲む
     cv2.drawContours(result_image, [box], 0, contour_color, contour_thickness)
@@ -127,7 +127,7 @@ def measure_object(bg_image, object_image, ratio, show_result=False):
     # 結果を表示する
     if show_result:
         # 外周をラインで囲む色 (BGR)
-        contour_color = (0, 255, 0)
+        contour_color = (255, 51, 0)
 
         # 外周をラインで囲む太さ
         contour_thickness = 3

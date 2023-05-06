@@ -22,6 +22,20 @@ def ruler_app():
 
 
     if background_image is not None and ruler_image is not None and object_image is not None:
+        # ボタンのサイズを変更するCSSを追加
+        st.markdown("""
+            <style>
+                .stButton>button {
+                    width: 200px;
+                    height: 50px;
+                    background-color: #4CAF50;
+                    color: white;
+                    font-size: 1.5em;
+                    margin: 0 auto;
+                    display: block;
+                }
+            </style>
+        """, unsafe_allow_html=True)
         process_images = st.button("測定開始")
 
         if process_images:

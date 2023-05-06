@@ -13,6 +13,7 @@ cryptography==40.0.2
 cycler==0.11.0
 decorator==5.1.1
 entrypoints==0.4
+Flask==2.3.2
 fonttools==4.39.3
 frozendict==2.3.8
 gitdb==4.0.10
@@ -27,6 +28,7 @@ httplib2==0.22.0
 idna==3.4
 importlib-metadata==6.6.0
 importlib-resources==5.12.0
+itsdangerous==2.1.2
 Jinja2==3.1.2
 jsonschema==4.17.3
 kiwisolver==1.4.4
@@ -77,5 +79,6 @@ uritemplate==4.1.1
 urllib3==1.26.15
 validators==0.20.0
 webencodings==0.5.1
+Werkzeug==2.3.3
 yfinance==0.2.18
 zipp==3.15.0
