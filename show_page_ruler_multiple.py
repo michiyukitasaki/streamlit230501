@@ -46,6 +46,36 @@ def ruler_multiple_app():
     st.markdown("<div class='guidance'>6. 測定結果をCSVファイルとしてダウンロードするには、[測定結果と統計結果をダウンロード] ボタンをクリックします。</div>",
                 unsafe_allow_html=True)
 
+    # カスタムスタイルを定義
+    style = """
+    <style>
+    .guidance {
+        background-color: #91aed9;
+        padding: 20px;
+        border-radius: 0px;
+    }
+    </style>
+    """
+    st.markdown(style, unsafe_allow_html=True)
+
+    st.header("使い方ガイド")
+
+    st.markdown(
+        "<div class='guidance'>このアプリでは、背景画像と定規画像をアップロードし、物体の寸法を測定できます。以下の手順に従って操作してください。</div>",
+        unsafe_allow_html=True)
+
+    st.markdown("<div class='guidance'>1. [背景画像アップロード] ボタンをクリックし、背景画像をアップロードします。</div>", unsafe_allow_html=True)
+    st.markdown("<div class='guidance'>2. [定規画像アップロード] ボタンをクリックし、定規画像をアップロードします。</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='guidance'>3. [測定対象画像アップロード] ボタンをクリックして測定対象画像をアップロードします。</div>",
+        unsafe_allow_html=True)
+    st.markdown("<div class='guidance'>4. 背景画像、定規画像、測定対象画像（複数枚OK）がアップロードされたら、[測定開始] ボタンをクリックします。</div>",
+                unsafe_allow_html=True)
+    st.markdown("<div class='guidance'>5. 測定結果と統計結果が表示されます。</div>",
+                unsafe_allow_html=True)
+    st.markdown("<div class='guidance'>6. 測定結果をCSVファイルとしてダウンロードするには、[測定結果と統計結果をダウンロード] ボタンをクリックします。</div>",
+                unsafe_allow_html=True)
+
     st.header("1. 背景画像をアップロード")
     background_image = st.file_uploader("背景画像を選択してください", type=["png", "jpg", "jpeg"])
 
