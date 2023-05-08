@@ -9,7 +9,7 @@ from RulerApp.ruler_method import detect_ruler_and_calculate_ratio, measure_obje
 
 def ruler_app():
     # UIの作成
-    st.title("定規アプリ")
+    st.title("メジャーアプリ（校正確認用）")
 
     st.header("1. 背景画像をアップロード")
     background_image = st.file_uploader("背景画像を選択してください", type=["png", "jpg", "jpeg"])

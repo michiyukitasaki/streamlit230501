@@ -11,29 +11,29 @@ from show_page_wieght import weight_app
 
 
 # ページの選択肢
-page = st.sidebar.radio('ページを選択してください:', ('体重管理', '資産管理', '株価管理', 'Qiita検索', 'スプレッドシート一覧','OCR処理', 'メジャーアプリ','メジャー（マルチ）アプリ'))
+# page = st.sidebar.radio('ページを選択してください:', ('体重管理', '資産管理', '株価管理', 'Qiita検索', 'スプレッドシート一覧','OCR処理', 'メジャーアプリ','メジャー（マルチ）アプリ'))
+page = st.sidebar.radio('ページを選択してください:', ('メジャーアプリ（校正確認用）','メジャーアプリ（複数枚OK）'))
+# # ページに応じた操作
+# if page == '体重管理':
+#     weight_app()
+#
+# elif page == '資産管理':
+#     show_data_on_streamlit()
+#
+# elif page == '株価管理':
+#     finance_app()
+#
+# elif page == 'Qiita検索':
+#     qiita_api()
+#
+# elif page == 'スプレッドシート一覧':
+#     gs_app()
+#
+# elif page == 'OCR処理':
+#     ocr_app()
 
-# ページに応じた操作
-if page == '体重管理':
-    weight_app()
-
-elif page == '資産管理':
-    show_data_on_streamlit()
-
-elif page == '株価管理':
-    finance_app()
-
-elif page == 'Qiita検索':
-    qiita_api()
-
-elif page == 'スプレッドシート一覧':
-    gs_app()
-
-elif page == 'OCR処理':
-    ocr_app()
-
-elif page == 'メジャーアプリ':
+if page == 'メジャーアプリ（校正確認用）':
     ruler_app()
 
-elif page == 'メジャー（マルチ）アプリ':
+elif page == 'メジャーアプリ（複数枚OK）':
     ruler_multiple_app()
