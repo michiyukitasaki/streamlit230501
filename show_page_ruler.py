@@ -9,16 +9,28 @@ from RulerApp.ruler_method import detect_ruler_and_calculate_ratio, measure_obje
 
 def ruler_app():
     # UIの作成
-    st.title("メジャーアプリ（校正確認用）")
+    st.title("テスト用")
+
+    # スペースと境界線を追加します。
+    st.markdown("<hr/>", unsafe_allow_html=True)
 
     st.header("1. 背景画像をアップロード")
     background_image = st.file_uploader("背景画像を選択してください", type=["png", "jpg", "jpeg"])
 
+    # スペースと境界線を追加します。
+    st.markdown("<hr/>", unsafe_allow_html=True)
+
     st.header("2. 定規画像をアップロード")
     ruler_image = st.file_uploader("定規画像を選択してください", type=["png", "jpg", "jpeg"])
 
+    # スペースと境界線を追加します。
+    st.markdown("<hr/>", unsafe_allow_html=True)
+
     st.header("3. 測定対象画像をアップロード")
     object_image = st.file_uploader("測定対象画像を選択してください", type=["png", "jpg", "jpeg"])
+
+    # スペースと境界線を追加します。
+    st.markdown("<hr/>", unsafe_allow_html=True)
 
 
     if background_image is not None and ruler_image is not None and object_image is not None:
@@ -48,6 +60,9 @@ def ruler_app():
             ruler_image = np.array(ruler_image)
             ruler_image = ruler_image[:, :, ::-1].copy()
 
+            # スペースと境界線を追加します。
+            st.markdown("<hr/>", unsafe_allow_html=True)
+
             # 処理Aの実行
             ratio,marked_ruler_image = detect_ruler_and_calculate_ratio(background_image, ruler_image)
             st.header("4. 正しく定規が検出できたかを確認してください")
@@ -62,6 +77,8 @@ def ruler_app():
             #
 
             if object_image is not None :
+                # スペースと境界線を追加します。
+                st.markdown("<hr/>", unsafe_allow_html=True)
                 st.header("5. 測定結果")
                 # 画像をOpenCV形式に変換
                 object_image = Image.open(object_image).convert("RGB")
@@ -71,10 +88,15 @@ def ruler_app():
                 perimeter_cm, width_cm, height_cm, area_cm2, result_image = measure_object(background_image,object_image, ratio)
 
                 st.image(result_image, caption="測定結果")
+
+                # 長辺と短辺を判断します。
+                long_side_cm = max(width_cm, height_cm)
+                short_side_cm = min(width_cm, height_cm)
+
                 # 一覧表を作成
                 measurements_df = pd.DataFrame({
-                    "項目": ["周囲の長さ[cm]", "幅[cm]", "高さ[cm]", "面積[cm^2]"],
-                    "値": [f"{perimeter_cm:.2f}", f"{width_cm:.2f}", f"{height_cm:.2f}", f"{area_cm2:.2f} "]
+                    "項目": ["周囲の長さ[cm]", "長辺[cm]", "短辺[cm]", "面積[cm^2]"],
+                    "値": [f"{perimeter_cm:.2f}", f"{long_side_cm:.2f}", f"{short_side_cm:.2f}", f"{area_cm2:.2f} "]
                 })
 
                 # 一覧表を表示

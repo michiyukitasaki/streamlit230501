@@ -103,10 +103,10 @@ def measure_object(bg_image, object_image, ratio, show_result=False):
 
     # 寸法を画像に描画する
     result_image = object_image.copy()
-    cv2.putText(result_image, f"Width: {width_cm:.2f} cm", (x, y + h + 420), cv2.FONT_HERSHEY_SIMPLEX, 5, (255, 51, 0), 5)
-    cv2.putText(result_image, f"Height: {height_cm:.2f} cm", (x, y + h + 570), cv2.FONT_HERSHEY_SIMPLEX, 5, (255, 51, 0), 5)
-    cv2.putText(result_image, f"Area: {area_cm2:.2f} cm^2", (x, y + h + 120), cv2.FONT_HERSHEY_SIMPLEX, 5, (255, 51, 0), 5)
-    cv2.putText(result_image, f"Perimeter: {perimeter_cm:.2f} cm", (x, y + h + 270), cv2.FONT_HERSHEY_SIMPLEX, 5, (255, 51, 0), 5)
+    # cv2.putText(result_image, f"Width: {width_cm:.2f} cm", (x, y + h + 420), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 51, 0), 5)
+    # cv2.putText(result_image, f"Height: {height_cm:.2f} cm", (x, y + h + 570), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 51, 0), 5)
+    # cv2.putText(result_image, f"Area: {area_cm2:.2f} cm^2", (x, y + h + 120), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 51, 0), 5)
+    # cv2.putText(result_image, f"Perimeter: {perimeter_cm:.2f} cm", (x, y + h + 270), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 51, 0), 5)
 
     # 最小外接矩形を取得
     rect = cv2.minAreaRect(object_contour)
@@ -152,9 +152,13 @@ if __name__ == "__main__":
 
     perimeter, width, height, area, result_image = measure_object(bg_image, object_img, ratio, show_result=True)
 
+    # 長辺と短辺を判断します。
+    long_side_cm = max(width, height)
+    short_side_cm = min(width, height)
+
     # 結果を表示する
     print("物体の外周: {:.2f} cm".format(perimeter))
-    print("物体の幅: {:.2f} cm".format(width))
-    print("物体の高さ: {:.2f} cm".format(height))
+    print("長辺: {:.2f} cm".format(long_side_cm))
+    print("短辺: {:.2f} cm".format(short_side_cm))
     print("物体の面積: {:.2f} cm".format(area))
 
