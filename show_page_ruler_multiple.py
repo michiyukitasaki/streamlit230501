@@ -58,7 +58,7 @@ def ruler_multiple_app():
     # 背景画像、定規画像、測定対象画像のアップロードセクションを作成します。
     col5, col6 = st.columns([1, 3])
     # 左側の列に画像を配置します。
-    col5.image("Image/White.jpeg", width=100)
+    col5.image("/home/user/Image/White.jpeg", width=100)
     col6.header("①. 背景画像をアップロード")
     background_image = st.file_uploader("背景画像を選択してください", type=["png", "jpg", "jpeg"])
 
@@ -68,7 +68,7 @@ def ruler_multiple_app():
     # 背景画像、定規画像、測定対象画像のアップロードセクションを作成します。
     col1, col2 = st.columns([1, 3])
     # 左側の列に画像を配置します。
-    col1.image("Image/Ruler.jpg", width=100)
+    col1.image("/home/user/Image/Ruler.jpg", width=100)
 
     col2.header("②. 定規画像をアップロード")
     ruler_image = st.file_uploader("定規画像を選択してください", type=["png", "jpg", "jpeg"])
@@ -79,7 +79,7 @@ def ruler_multiple_app():
     # 背景画像、定規画像、測定対象画像のアップロードセクションを作成します。
     col3, col4 = st.columns([1, 3])
     # 左側の列に画像を配置します。
-    col3.image("Image/Pan.jpeg", width=100)
+    col3.image("/home/user/Image/Pan.jpeg", width=100)
     col4.header("③. パン画像（複数枚OK）をアップロード")
     uploaded_files = st.file_uploader("複数の物体画像を選択してください（フォルダ内のすべての画像を選択）", type=["png", "jpg", "jpeg"], accept_multiple_files=True)
 
