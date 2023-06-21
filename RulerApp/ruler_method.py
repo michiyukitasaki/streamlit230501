@@ -10,7 +10,7 @@ def detect_ruler_and_calculate_ratio(bg_image, ruler_image, show_diff=False, sho
     diff = cv2.absdiff(bg_gray, ruler_gray)
 
     # 差分画像に閾値処理を適用
-    threshold_value = 60
+    threshold_value = 80
     _, thresholded_diff = cv2.threshold(diff, threshold_value, 255, cv2.THRESH_BINARY)
 
     if show_diff:
@@ -37,7 +37,7 @@ def detect_ruler_and_calculate_ratio(bg_image, ruler_image, show_diff=False, sho
     longest_side = max(w, h)
 
     # 定規の長さ（センチメートル）をピクセルで割って比率を計算
-    ruler_length_cm = 15
+    ruler_length_cm = 15.5
     ratio = ruler_length_cm / longest_side
 
     # (戻り値)定規の最長辺に沿って矢印を描画
