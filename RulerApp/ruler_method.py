@@ -10,7 +10,7 @@ def detect_ruler_and_calculate_ratio(bg_image, ruler_image, show_diff=False, sho
     diff = cv2.absdiff(bg_gray, ruler_gray)
 
     # 差分画像に閾値処理を適用
-    threshold_value = 80
+    threshold_value = 30
     _, thresholded_diff = cv2.threshold(diff, threshold_value, 255, cv2.THRESH_BINARY)
 
     if show_diff:
