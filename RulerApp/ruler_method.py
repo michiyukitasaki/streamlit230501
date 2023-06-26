@@ -1,17 +1,24 @@
 import cv2
 import numpy as np
 
-def detect_ruler_and_calculate_ratio(bg_image, ruler_image, show_diff=False, show_marked_ruler=False):
+def detect_ruler_and_calculate_ratio(bg_image, ruler_image, ruler_length, show_diff=False, show_marked_ruler=False):
     # 画像をグレースケールに変換
     bg_gray = cv2.cvtColor(bg_image, cv2.COLOR_BGR2GRAY)
     ruler_gray = cv2.cvtColor(ruler_image, cv2.COLOR_BGR2GRAY)
+
+    # ガウシアンブラーを適用
+    bg_gray = cv2.GaussianBlur(bg_gray, (5, 5), 0)
+    ruler_gray = cv2.GaussianBlur(ruler_gray, (5, 5), 0)
 
     # 二つの画像間の絶対差分を計算
     diff = cv2.absdiff(bg_gray, ruler_gray)
 
     # 差分画像に閾値処理を適用
-    threshold_value = 30
+    threshold_value = 80
     _, thresholded_diff = cv2.threshold(diff, threshold_value, 255, cv2.THRESH_BINARY)
+
+    # アダプティブ閾値処理を適用
+    # thresholded_diff = cv2.adaptiveThreshold(diff, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
 
     if show_diff:
         cv2.imshow("閾値処理された差分画像", thresholded_diff)
@@ -37,7 +44,7 @@ def detect_ruler_and_calculate_ratio(bg_image, ruler_image, show_diff=False, sho
     longest_side = max(w, h)
 
     # 定規の長さ（センチメートル）をピクセルで割って比率を計算
-    ruler_length_cm = 15.5
+    ruler_length_cm = ruler_length
     ratio = ruler_length_cm / longest_side
 
     # (戻り値)定規の最長辺に沿って矢印を描画
@@ -69,15 +76,21 @@ def measure_object(bg_image, object_image, ratio, show_result=False):
     bg_gray = cv2.cvtColor(bg_image, cv2.COLOR_BGR2GRAY)
     object_gray = cv2.cvtColor(object_image, cv2.COLOR_BGR2GRAY)
 
+    # ガウシアンブラーを適用
+    bg_gray = cv2.GaussianBlur(bg_gray, (5, 5), 0)
+    object_gray = cv2.GaussianBlur(object_gray, (5, 5), 0)
+
     # 二つの画像間の絶対差分を計算
     diff = cv2.absdiff(bg_gray, object_gray)
 
     # 差分画像に閾値処理を適用
-    threshold_value = 60
+    threshold_value = 80
     _, thresholded_diff = cv2.threshold(diff, threshold_value, 255, cv2.THRESH_BINARY)
 
     # 閾値処理された差分画像で輪郭を検出
     contours, _ = cv2.findContours(thresholded_diff, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+
 
     # 最大面積の輪郭を見つける（物体と仮定）
     max_area = 0
@@ -132,25 +145,26 @@ def measure_object(bg_image, object_image, ratio, show_result=False):
         # 外周をラインで囲む太さ
         contour_thickness = 3
 
-        # 外周をラインで囲む
-        cv2.drawContours(result_image, [box], 0, contour_color, contour_thickness)
-
-        cv2.imshow("結果", result_image)
+        # 差分画像を表示
+        cv2.imshow("Diff", diff)
+        cv2.imshow("Thresholded Diff", thresholded_diff)
+        cv2.imshow("Result", result_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-    return perimeter_cm, width_cm, height_cm, area_cm2, result_image
+    return perimeter_cm, width_cm, height_cm, area_cm2, result_image, diff, thresholded_diff
 
 
 if __name__ == "__main__":
-    bg_image = cv2.imread("/Volumes/SSD-PUTU3C/pythonProject/Streamlit0501/RulerApp/bg.jpg")
-    ruler_image = cv2.imread("/Volumes/SSD-PUTU3C/pythonProject/Streamlit0501/RulerApp/ruler_img.jpg")
-    object_img = cv2.imread("/Volumes/SSD-PUTU3C/pythonProject/Streamlit0501/RulerApp/object_img.jpg")
+    bg_image = cv2.imread("/Volumes/SSD-PUTU3C/pythonProject/Streamlit0501/Image/PanTest_0622/BackGround.jpg")
+    ruler_image = cv2.imread("/Volumes/SSD-PUTU3C/pythonProject/Streamlit0501/Image/PanTest_0622/Ruler.jpg")
+    # object_img = cv2.imread("/Volumes/SSD-PUTU3C/pythonProject/Streamlit0501/Image/PanTest_0622/Pan.jpg")
+    object_img = cv2.imread("/Volumes/SSD-PUTU3C/pythonProject/Streamlit0501/Image/Pan/Width/1687261523448.jpg")
 
-    ratio = detect_ruler_and_calculate_ratio(bg_image, ruler_image, show_diff=True, show_marked_ruler=True)
+    ratio, marked_ruler_image = detect_ruler_and_calculate_ratio(bg_image, ruler_image, show_diff=True, show_marked_ruler=True)
     print("Length per pixel: {:.4f} cm".format(ratio))
 
-    perimeter, width, height, area, result_image = measure_object(bg_image, object_img, ratio, show_result=True)
+    perimeter, width, height, area, result_image, diff, thresholded_diff = measure_object(bg_image, object_img, ratio, show_result=True)
 
     # 長辺と短辺を判断します。
     long_side_cm = max(width, height)
@@ -162,3 +176,9 @@ if __name__ == "__main__":
     print("短辺: {:.2f} cm".format(short_side_cm))
     print("物体の面積: {:.2f} cm".format(area))
 
+    # 結果画像を表示する
+    cv2.imshow("Diff", diff)
+    cv2.imshow("Thresholded Diff", thresholded_diff)
+    cv2.imshow("Result Image", result_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

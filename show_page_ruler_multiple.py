@@ -72,6 +72,9 @@ def ruler_multiple_app():
 
     st.header("②. 定規画像をアップロード")
     ruler_image = st.file_uploader("定規画像を選択してください", type=["png", "jpg", "jpeg"])
+    # ruler_length = st.slider("定規の長さ（cm）", 10.0, 25.0, step=0.1)
+    ruler_length = st.text_input("定規の長さ（cm）", value=float(15.0))
+    ruler_length = float(ruler_length)
 
     # スペースと境界線を追加します。
     st.markdown("<hr/>", unsafe_allow_html=True)
@@ -108,7 +111,7 @@ def ruler_multiple_app():
             st.markdown("<hr/>", unsafe_allow_html=True)
 
             # 定規を検出し、比率を計算します。
-            ratio,marked_ruler_image = detect_ruler_and_calculate_ratio(background_image, ruler_image)
+            ratio,marked_ruler_image = detect_ruler_and_calculate_ratio(background_image, ruler_image, ruler_length)
             st.header("④. 正しく定規が検出できたかを確認してください")
             st.image(marked_ruler_image, caption="定規画像")
 
@@ -121,7 +124,7 @@ def ruler_multiple_app():
                     object_image = object_image[:, :, ::-1].copy()
 
                     # 測定を実行します。
-                    perimeter_cm, width_cm, height_cm, area_cm2, _ = measure_object(background_image, object_image,
+                    perimeter_cm, width_cm, height_cm, area_cm2, _, _, _ = measure_object(background_image, object_image,
                                                                                     ratio)
 
                     # 長辺と短辺を判断します。
