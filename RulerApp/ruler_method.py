@@ -6,15 +6,15 @@ def detect_ruler_and_calculate_ratio(bg_image, ruler_image, ruler_length, show_d
     bg_gray = cv2.cvtColor(bg_image, cv2.COLOR_BGR2GRAY)
     ruler_gray = cv2.cvtColor(ruler_image, cv2.COLOR_BGR2GRAY)
 
-    # ガウシアンブラーを適用
-    bg_gray = cv2.GaussianBlur(bg_gray, (5, 5), 0)
-    ruler_gray = cv2.GaussianBlur(ruler_gray, (5, 5), 0)
+    # # ガウシアンブラーを適用
+    # bg_gray = cv2.GaussianBlur(bg_gray, (5, 5), 0)
+    # ruler_gray = cv2.GaussianBlur(ruler_gray, (5, 5), 0)
 
     # 二つの画像間の絶対差分を計算
     diff = cv2.absdiff(bg_gray, ruler_gray)
 
     # 差分画像に閾値処理を適用
-    threshold_value = 20
+    threshold_value = 25
     _, thresholded_diff = cv2.threshold(diff, threshold_value, 255, cv2.THRESH_BINARY)
 
     # アダプティブ閾値処理を適用
@@ -76,15 +76,15 @@ def measure_object(bg_image, object_image, ratio, show_result=False):
     bg_gray = cv2.cvtColor(bg_image, cv2.COLOR_BGR2GRAY)
     object_gray = cv2.cvtColor(object_image, cv2.COLOR_BGR2GRAY)
 
-    # ガウシアンブラーを適用
-    bg_gray = cv2.GaussianBlur(bg_gray, (5, 5), 0)
-    object_gray = cv2.GaussianBlur(object_gray, (5, 5), 0)
+    # # ガウシアンブラーを適用
+    # bg_gray = cv2.GaussianBlur(bg_gray, (5, 5), 0)
+    # object_gray = cv2.GaussianBlur(object_gray, (5, 5), 0)
 
     # 二つの画像間の絶対差分を計算
     diff = cv2.absdiff(bg_gray, object_gray)
 
     # 差分画像に閾値処理を適用
-    threshold_value = 20
+    threshold_value = 25
     _, thresholded_diff = cv2.threshold(diff, threshold_value, 255, cv2.THRESH_BINARY)
 
     # 閾値処理された差分画像で輪郭を検出
