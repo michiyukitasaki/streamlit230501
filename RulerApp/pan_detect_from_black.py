@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 
 def remove_black_background_and_display(img, isShow=False):
-    # 色範囲を設定する1
+    # 色範囲を設定する12
     #黒
     lower_val = np.array([0,0,0])
     upper_val = np.array([180,180,180])

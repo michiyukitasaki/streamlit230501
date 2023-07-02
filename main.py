@@ -13,7 +13,7 @@ from show_page_wieght import weight_app
 # ページの選択肢
 # page = st.sidebar.radio('ページを選択してください:', ('体重管理', '資産管理', '株価管理', 'Qiita検索', 'スプレッドシート一覧','OCR処理', 'メジャーアプリ','メジャー（マルチ）アプリ'))
 page = st.sidebar.radio('ページを選択してください:', ('テスト','測定アプリ'))
-# # ページに応じた操作1
+# # ページに応じた操作12
 # if page == '体重管理':
 #     weight_app()
 #

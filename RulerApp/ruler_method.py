@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 def detect_ruler_and_calculate_ratio(bg_image, ruler_image, ruler_length, show_diff=False, show_marked_ruler=False):
-    # 画像をグレースケールに変換1
+    # 画像をグレースケールに変換12
     bg_gray = cv2.cvtColor(bg_image, cv2.COLOR_BGR2GRAY)
     ruler_gray = cv2.cvtColor(ruler_image, cv2.COLOR_BGR2GRAY)
 

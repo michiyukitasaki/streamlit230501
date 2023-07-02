@@ -14,7 +14,7 @@ from RulerApp.ruler_method import detect_ruler_and_calculate_ratio, measure_obje
 
 # アプリケーションのメイン関数を定義します。
 def ruler_multiple_app():
-    # UIの作成
+    # UIの作成2
     st.title("長辺・短辺・高さ・面積測定アプリ") # タイトルを設定します。
 
     # アプリケーションの説明を表示します。
