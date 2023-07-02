@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 from PIL import Image
 
+from RulerApp.pan_detect_from_black import remove_black_background_and_display
 from RulerApp.ruler_method import detect_ruler_and_calculate_ratio, measure_object
 
 
@@ -57,10 +58,12 @@ def ruler_app():
             background_image = Image.open(background_image).convert("RGB")
             background_image = np.array(background_image)
             background_image = background_image[:, :, ::-1].copy()
+            background_image = remove_black_background_and_display(background_image)
 
             ruler_image = Image.open(ruler_image).convert("RGB")
             ruler_image = np.array(ruler_image)
             ruler_image = ruler_image[:, :, ::-1].copy()
+            ruler_image = remove_black_background_and_display(ruler_image)
 
             # スペースと境界線を追加します。
             st.markdown("<hr/>", unsafe_allow_html=True)
@@ -86,6 +89,7 @@ def ruler_app():
                 object_image = Image.open(object_image).convert("RGB")
                 object_image = np.array(object_image)
                 object_image = object_image[:, :, ::-1].copy()
+                object_image = remove_black_background_and_display(object_image)
 
                 perimeter_cm, width_cm, height_cm, area_cm2, result_image,_, _  = measure_object(background_image,object_image, ratio)
 
