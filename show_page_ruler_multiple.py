@@ -66,7 +66,7 @@ def ruler_multiple_app():
     # スペースと境界線を追加します。
     st.markdown("<hr/>", unsafe_allow_html=True)
 
-    # 背景画像、定規画像、測定対象画像のアップロードセクションを作成します。
+    # 背景画像、定規画像、測定対象画像のアップロードセクションを作成します。1
     # col1, col2 = st.columns([1, 3])
     # 左側の列に画像を配置します。
     # col1.image("/home/user/Image/Ruler.jpg", width=100)

@@ -37,7 +37,7 @@ def ruler_app():
 
 
     if background_image is not None and ruler_image is not None and object_image is not None:
-        # ボタンのサイズを変更するCSSを追加
+        # ボタンのサイズを変更するCSSを追加1
         st.markdown("""
             <style>
                 .stButton>button {
