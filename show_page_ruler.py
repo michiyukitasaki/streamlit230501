@@ -9,7 +9,7 @@ from RulerApp.ruler_method import detect_ruler_and_calculate_ratio, measure_obje
 
 
 def ruler_app():
-    # UIの作成
+    # UIの作成12
     st.title("テスト用")
 
     # スペースと境界線を追加します。
