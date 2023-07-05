@@ -14,7 +14,7 @@ def detect_ruler_and_calculate_ratio(bg_image, ruler_image, ruler_length, show_d
     diff = cv2.absdiff(bg_gray, ruler_gray)
 
     # 差分画像に閾値処理を適用
-    threshold_value = 30
+    threshold_value = 40
     _, thresholded_diff = cv2.threshold(diff, threshold_value, 255, cv2.THRESH_BINARY)
 
     # アダプティブ閾値処理を適用
@@ -84,7 +84,7 @@ def measure_object(bg_image, object_image, ratio, show_result=False):
     diff = cv2.absdiff(bg_gray, object_gray)
 
     # 差分画像に閾値処理を適用
-    threshold_value = 30
+    threshold_value = 40
     _, thresholded_diff = cv2.threshold(diff, threshold_value, 255, cv2.THRESH_BINARY)
 
     # 閾値処理された差分画像で輪郭を検出
