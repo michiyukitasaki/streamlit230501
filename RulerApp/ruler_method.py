@@ -132,7 +132,7 @@ def measure_object(bg_image, object_image, ratio, show_result=False):
     contour_color = (255, 51, 0)
 
     # 外周をラインで囲む太さ
-    contour_thickness = 5
+    contour_thickness = 20
 
     # 外周をラインで囲む
     cv2.drawContours(result_image, [box], 0, contour_color, contour_thickness)
