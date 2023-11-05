@@ -3,7 +3,7 @@ import cv2
 
 
 def detect_and_fill(img_array, actual_length, scale_factor=None):
-    threshold = 100
+    threshold = 150
 
     img_color = img_array.copy()
     img_gray = cv2.cvtColor(img_color, cv2.COLOR_BGR2GRAY)
